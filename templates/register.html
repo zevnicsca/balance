@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    | Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text" id="username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit" id="reg">Register</button>
+    </form>
+    <script   src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script>
+    //Listen for the submit button
+    $("#reg").on('click', function( event ) {
+        //Hold the event
+        event.preventDefault();
+        $.get("/check?username="+encodeURIComponent($("#username").val()), function(data){
+            console.log(data)
+            //Submit the form if the name is ok to use
+            if(data){
+                $("form").submit();
+            }
+            //Prompt for new name if not
+            else{
+                alert("This username is already taken")
+            }
+        })
+    });
+    </script>
+{% endblock %}

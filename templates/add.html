@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Balance | Add Expense</title>
+		<link rel="shortcut icon" href="static/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="static/css/normalize2.css" />
+		<link rel="stylesheet" type="text/css" href="static/css/demo2.css" />
+		<link rel="stylesheet" type="text/css" href="static/css/component.css" />
+		<link rel="stylesheet" type="text/css" href="static/css/cs-select.css" />
+		<link rel="stylesheet" type="text/css" href="static/css/cs-skin-boxes.css" />
+		<script src="static/js/modernizr.custom.js"></script>
+		<!--
+		Inspired by the tutorial for Fullscreen Form Interface
+		Link: https://tympanus.net/codrops/2014/07/30/fullscreen-form-interface/
+		Icons Credit to Roundicons (https://roundicons.com/)
+		-->
+	</head>
+	<body>
+		<div class="container">
+
+			<div class="fs-form-wrap" id="fs-form-wrap">
+				<div class="fs-title">
+					<h1>Add Expense</h1>
+					<div class="codrops-top">
+						<a class="codrops-icon codrops-icon-prev" href="/groups?id={{group_id}}"><span>Previous Demo</span></a>
+					</div>
+				</div>
+				<form id="myform" class="fs-form fs-form-full" autocomplete="off" method="post" action="/add?id={{group_id}}">
+					<ol class="fs-fields">
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="name">What's the expense for?</label>
+							<input class="fs-anim-lower" id="q1" name="name" type="text" placeholder="Dinner Last Night" required/>
+						</li>
+						<li data-input-trigger>
+							<label class="fs-field-label fs-anim-upper" for="type">What type of expense?</label>
+							<div class="fs-radio-group fs-radio-custom clearfix fs-anim-lower">
+								<span><input id="q3b" name="type" type="radio" value="Food" required/><label for="q3b" class="radio-food">Food</label></span>
+								<span><input id="q3c" name="type" type="radio" value="Drinks" required/><label for="q3c" class="radio-drinks">Drinks</label></span>
+								<span><input id="q3a" name="type" type="radio" value="Travel" required/><label for="q3a" class="radio-travel">Travel</label></span>
+								<span><input id="q3d" name="type" type="radio" value="Hotels" required/><label for="q3d" class="radio-hotel">Hotel</label></span>
+								<span><input id="q3e" name="type" type="radio" value="Other" required/><label for="q3e" class="radio-other">Other</label></span>
+
+							</div>
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="description">Description of the expense</label>
+							<textarea class="fs-anim-lower" id="q4" name="description" placeholder="Describe here" required></textarea>
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="amount">How much?</label>
+							<input class="fs-mark fs-anim-lower" id="q5" name="amount" type="number" placeholder="1000" step="0.01" required/>
+						</li>
+					</ol><!-- /fs-fields -->
+					<button class="fs-submit" type="submit">Create Expense</button>
+				</form><!-- /fs-form -->
+			</div><!-- /fs-form-wrap -->
+
+		</div><!-- /container -->
+		<script src="static/js/classie.js"></script>
+		<script src="static/js/selectFx.js"></script>
+		<script src="static/js/fullscreenForm.js"></script>
+		<script>
+			(function() {
+				var formWrap = document.getElementById( 'fs-form-wrap' );
+
+				[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {
+					new SelectFx( el, {
+						stickyPlaceholder: false,
+						onChange: function(val){
+							document.querySelector('span.cs-placeholder').style.backgroundColor = val;
+						}
+					});
+				} );
+
+				new FForm( formWrap, {
+					onReview : function() {
+						classie.add( document.body, 'overview' ); // for demo purposes only
+					}
+				} );
+			})();
+		</script>
+	</body>
+</html>

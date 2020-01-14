@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+
+        <h1>{{group['name']}} - Expenses</h1>
+        <hr>
+        {% for expense in group['expenses'] %}
+            <a class="group_wrapper">
+            <h3>{{expense['name']}}</h3>
+            <span>{{expense['payer']}} paid {{expense['amount']|float|usd}} for {{expense['type']}}<br>
+            "{{expense['description']}}"
+            </span>
+            </a>
+        {% endfor %}
+{% endblock %}

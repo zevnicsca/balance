@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+
+        <h1>My Groups</h1>
+        <hr>
+        {% for group in user_groups %}
+            <a class="group_wrapper" href="\groups?id={{group['_id']}}">
+            <h3>{{group['name']}}</h3>
+            <span>A group you share with
+            {% for username in group['users']|reject('in',[current_username]) -%}
+                {{username}}
+                {%- if not loop.last -%}
+                ,
+                {% endif -%}
+            {% endfor %}
+            </span>
+            </a>
+        {% endfor %}
+        <h1>My Balances</h1>
+        <hr>
+       <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in balances.keys() %}
+                <tr>
+                    <td>{{key}}</td>
+                    <td>{{balances[key]|float|usd}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
